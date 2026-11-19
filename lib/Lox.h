@@ -4,7 +4,7 @@ using namespace std;
 
 class Lox {
     public:
-    static bool hadError;
+    inline static bool hadError = false;
     
     Lox();
     void runFile(string path);
@@ -13,5 +13,6 @@ class Lox {
     void error(int line, string message);
     void report (int line, string where, string message);
         
-} lox;
+};
      
+extern Lox lox;

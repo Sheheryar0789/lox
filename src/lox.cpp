@@ -2,15 +2,13 @@
 #include <fstream>
 #include <string>
 #include <list>
-#include "TokenType.h"
 #include "Scanner.h"
 #include "Lox.h"
 using namespace std;
     
-Lox::Lox() { hadError = false;}
-
+Lox::Lox() {}
 void Lox::runFile(string path) {
-    ifstream file(path);
+    ifstream file(path); 
     string content = "";
     
     if (!file.is_open()){
@@ -21,7 +19,6 @@ void Lox::runFile(string path) {
     string line;
     while (getline(file, line)) {
         content = content + line;
-        // cout << line << endl; por solo debugging
     }
     file.close();
     
@@ -34,7 +31,7 @@ void Lox::runPrompt() {
     string input;
     for (;;) {
         cout << "> ";
-        cin >> input;
+        getline(cin, input);
         if (input == "exit") break;
         run(input);
         hadError = false;
@@ -47,8 +44,8 @@ void Lox::run(string source) {
     list<Token> tokens = scanner.scanTokens();
     
     for (Token token : tokens) {
-            cout << token.toString() << " ";
-        }
+            cout << token.toString() << endl;
+    }
 }
 
 void Lox::error(int line, string message) {
@@ -61,3 +58,4 @@ void Lox::report (int line, string where, string message){
 }
         
     
+Lox lox;
